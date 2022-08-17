@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>Ingeniería de Software - ¿Cómo guardar datos en AWS DynamoDb con una estructura dinámica? </title>
 
     <!-- Bootstrap Core CSS -->
@@ -72,7 +71,7 @@
                     <div class="post-heading">
                         <h1>¿Cómo guardar datos en AWS DynamoDb con una estructura dinámica?</h1>
                         <h2 class="subheading">Guardando estructuras de datos dinámicas desde Java en DynamoDb</h2>
-                        <span class="meta">Publicado por <a href="about.html">Carlex</a> en Agosto 21, 2022</span>
+                        <span class="meta">Publicado por <a href="https://www.linkedin.com/in/carlex3/">Carlex</a> en Agosto 21, 2022</span>
                     </div>
                 </div>
             </div>
@@ -84,9 +83,50 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <p><a href="https://aws.amazon.com/es/dynamodb/">Amazon DynamoDB</a> es un servicio AWS de base de datos NoSQL basada en clave-valor y en documentos. </p>
+                    <h3>Introducción</h3>
+                    <p>Este post se centrará en un caso de negocio, donde se requiere almacenar la información enviada en unas solicitudes con información de documentos físicos, sin embargo, el esquema de los datos enviados puede variar en cada solicitud con base en el tipo de documento recibido, por ejemplo. A continuación se muestra las peticiones para dos tipos de documentos, el primero representa un documento de radicación desde un cliente externo:</p>
+                    <pre>
+                        <code id="code1">
+{
+    "request_id": "rq11112", 
+    "document_type": "doc001",
+    "data": {
+        "from": "Customer 1",
+        "pages": 5,
+        "hash": "dedd0de5c9059f8c09494a2ef05e39992a6dde9b",
+        "creation_date": "2022-08-02",
+        "to": "Employee 1",
+        "quota": 5
+    }
+}
+                        </code>
+                    </pre>
+                    <p>El siguiente documento json representa un ejemplo de información de una circular, y la estructura del mismo es diferente de la anterior:</p>
+                    <pre>
+                        <code id="code2">
+{
+    "request_id": "rq11113", 
+    "document_type": "doc003",
+    "data": {
+        "from": "Management",
+        "pages": 1,
+        "hash": "dedd0de5c9059f8c09494a2ef05e39992a6dde9b",
+        "creation_date": "2022-08-02",
+        "destination_area": "account",
+        "valid_from": "2022-08-03",
+<span style="background-color: orange;">        "valid_until": "2022-09-01"</span>
+    }
+}
+                        </code>
+                    </pre>
+                    <h3>Java</h3>
+                    <p>Java es un lenguaje de programación que se caracteriza por ser fuertemente tipado, es decir, se necesita definir clases para instanciar objetos. Este lenguaje es ampliamente utilizado en soluciones de software, desde soluciones pequeñas hasta soluciones empresariales. En este post Java será el lenguaje de programación utilizado.</p>
 
-                    <p>Science cuts two ways, of course; its products can be used for both good and evil. But there's no turning back from science. The early warnings about technological dangers also come from science.</p>
+                    <h3>Amazon DynamoDB</h3>
+                    <p><a href="https://aws.amazon.com/es/dynamodb/">Amazon DynamoDB</a> es un servicio AWS de base de datos NoSQL basada en clave-valor y en documentos. Normalmente uno opta por una base de datos NoSQL cuando los datos a almacenar son estructurados, pero su estructura puede variar de un registro a otro, en este escenario es donde se enfoca este post.</p>
+
+
+                    <h3></h3>
 
                     <p>What was most significant about the lunar voyage was not that man set foot on the Moon but that they set eye on the earth.</p>
 
